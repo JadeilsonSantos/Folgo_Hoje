@@ -8,9 +8,9 @@ const convertDate = () => {
   var dataSelecionada = e.target.value;
   selectDate = new Date(dataSelecionada);
 
-    let day = dataSelecionada;
-    let moth = dataSelecionada;
-    let year = dataSelecionada;
+    let day = dataSelecionada.getDate();
+    let moth = dataSelecionada.getMoth();
+    let year = dataSelecionada.getFullYear();
 
    dataSelecionada = `${day}/${moth}/${year}`
 
