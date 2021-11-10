@@ -41,5 +41,7 @@ function minhaFolga(e){
 
       else{texto.innerHTML = (`Você TRABALHARÁ no dia ${dataSelecionada}`) }
 
+      console.log(diferenca)
+      console.log(folgaBaseAdd)
 }
 
