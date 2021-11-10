@@ -1,0 +1,26 @@
+#data{
+  padding: 20px;
+  margin: 20px auto;
+  width: 200px;
+  text-align: center;
+
+}
+
+span{
+  padding-bottom: 20px;
+  color: beige;
+
+}
+
+body{
+ background-image: linear-gradient(to right,rgb(248, 183, 204),rgb(245, 8, 107)
+ );
+}
+
+#resultado{
+color: white; 
+text-align: center;
+font-size: 20px;
+font-weight: bold;
+}
+
