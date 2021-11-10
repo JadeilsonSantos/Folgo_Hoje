@@ -3,10 +3,9 @@ var folgaBase = new Date('11/04/2021');
 const umDiaEmMS = 86400000
 var texto = document.querySelector("#resultado");
 
-const convertDate = () => {
+/* const convertDate = () => {
   
-  var dataSelecionada = e.target.value;
-  selectDate = new Date(dataSelecionada);
+ 
 
     let day = dataSelecionada.getDate();
     let moth = dataSelecionada.getMoth();
@@ -15,9 +14,12 @@ const convertDate = () => {
    dataSelecionada = `${day}/${moth}/${year}`
 
    minhaFolga(e,dataSelecionada,selectDate) 
-} 
+}  */
 
-function minhaFolga(e,dataSelecionada,selectDate){
+function minhaFolga(e){
+
+  var dataSelecionada = e.target.value;
+  selectDate = new Date(dataSelecionada);
     
     var diasDeFolga = [];
     var folgaBaseAdd = new Date(folgaBase);
