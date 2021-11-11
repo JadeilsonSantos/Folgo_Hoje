@@ -25,13 +25,13 @@ function minhaFolga(e){
  
   selectDate = new Date(dataSelecionada)
     
-    let diasDeFolga = [];
+    let diasTrabalho = [];
     let folgaBaseAdd = new Date(folgaBase);
     let i = 0;
 
       while (folgaBaseAdd <= selectDate) 
       { 
-        diasDeFolga.push(folgaBaseAdd.toString()); // aqui deve ta retornando sempre a mesma data        
+        diasTrabalho.push(folgaBaseAdd.toString()); // aqui deve ta retornando sempre a mesma data        
         folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
         //i+=8 // aqui faz o incremento da data né? >>> Sim
       }
@@ -47,7 +47,7 @@ function minhaFolga(e){
 
       console.log(diferenca)
       console.log(folgaBaseAdd)
-      console.log(diasDeFolga);
+      console.log(diasTrabalho);
 }
 
 function zeroNaFrente(data){
