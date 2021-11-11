@@ -16,6 +16,7 @@ var texto = document.querySelector('.resultado');
   
   minhaFolga(e,dataSelecionada,selectDate) 
 }  */
+
 function minhaFolga(e){
   
   let lista
