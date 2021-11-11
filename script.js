@@ -51,7 +51,7 @@ function minhaFolga(e){
 }
 
 function zeroNaFrente(data){
-  return data < 9 ? `0${data}`: `${data}` 
+  return data < 10 ? `0${data}`: `${data}` 
 }
 
 function converterDatas(d){    
