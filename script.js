@@ -17,9 +17,12 @@ var texto = document.querySelector("#resultado");
    minhaFolga(e,dataSelecionada,selectDate) 
 }  */
 
-function minhaFolga(e){
+function minhaFolga(e){ 
 
-  const dataSelecionada = e.target.value;
+  let dataSelecionada = e.target.value;
+
+  if (dataSelecionada == "") {texto.innerHTML = 'Resultado';return};
+ 
   selectDate = new Date(dataSelecionada)
     
     let diasDeFolga = [];
@@ -44,6 +47,7 @@ function minhaFolga(e){
 
       console.log(diferenca)
       console.log(folgaBaseAdd)
+      console.log(diasDeFolga);
 }
 
 function zeroNaFrente(data){
