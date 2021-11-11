@@ -5,7 +5,8 @@ var texto = document.querySelector("#resultado");
 
 /* const convertDate = () => {
   
- 
+ //e aí manoo
+ //ok
 
     let day = dataSelecionada.getDate();
     let moth = dataSelecionada.getMoth();
@@ -18,18 +19,17 @@ var texto = document.querySelector("#resultado");
 
 function minhaFolga(e){
 
-  var dataSelecionada = e.target.value;
+  const dataSelecionada = e.target.value;
   selectDate = new Date(dataSelecionada)
     
-    var diasDeFolga = [];
-    var folgaBaseAdd = new Date(folgaBase);
-    var i = 0;
+    let diasDeFolga = [];
+    let folgaBaseAdd = new Date(folgaBase);
+    let i = 0;
 
       while (folgaBaseAdd <= selectDate) 
       { folgaBaseAdd.setDate(folgaBase.getDate()+i);
-        diasDeFolga.push(folgaBaseAdd);
-        
-        i+=8
+        diasDeFolga.push(folgaBaseAdd); // aqui deve ta retornando sempre a mesma data        
+        i+=8 // aqui faz o incremento da data né?
       }
 
       let diferenca = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
@@ -37,11 +37,32 @@ function minhaFolga(e){
   
       if(diferenca > 0 && diferenca <5)
 
-      {texto.innerHTML = (`Você estará de FOLGA no dia ${dataSelecionada}`)}
+      {texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)}
 
-      else{texto.innerHTML = (`Você TRABALHARÁ no dia ${dataSelecionada}`) }
+      else{texto.innerHTML = (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`) }
 
       console.log(diferenca)
       console.log(folgaBaseAdd)
 }
+
+function zeroNaFrente(data){
+  return data < 9 ? `0${data}`: `${data}` 
+}
+
+function converterDatas(d){    
+  let data = new Date(d)
+  let ndata = new Date(data)
+  ndata.setDate(data.getDate() + 1)
+ 
+  let dia = zeroNaFrente(ndata.getDate())
+  let mes = zeroNaFrente(ndata.getMonth() +1)
+  let ano = ndata.getFullYear()
+
+  //console.log(`${dia}/${mes}/${ano}`)
+  //return ndata
+  return `${dia}/${mes}/${ano}` // aqui altera como vc quer o retorno
+}
+
+// Vou jogar aqui o codigo
+// Testa ai
 
