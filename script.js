@@ -27,9 +27,10 @@ function minhaFolga(e){
     let i = 0;
 
       while (folgaBaseAdd <= selectDate) 
-      { folgaBaseAdd.setDate(folgaBase.getDate()+i);
-        diasDeFolga.push(folgaBaseAdd); // aqui deve ta retornando sempre a mesma data        
-        i+=8 // aqui faz o incremento da data né?
+      { 
+        diasDeFolga.push(folgaBaseAdd.toString()); // aqui deve ta retornando sempre a mesma data        
+        folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
+        //i+=8 // aqui faz o incremento da data né? >>> Sim
       }
 
       let diferenca = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
