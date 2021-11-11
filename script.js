@@ -43,13 +43,13 @@ function minhaFolga(e){
   } */
   
   diasDeFolga.forEach(dias => {
-      let dados = document.createElement('div') // cria elemento li
+      let dados = document.createElement('li') // cria elemento li
       lista = document.querySelector('.lista').appendChild(dados)
-      lista.innerHTML += `<input type="text" value="${converterDatas(dias)}"/>` 
+      lista.innerHTML += `| ${converterDatas(dias)}` 
     })
-    if(diasDeFolga != 0){
+   
       lista.innerHTML = ''
-    }
+  
   //console.log(diferenca)
       //console.log(diasDeFolga)
 }

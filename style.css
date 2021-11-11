@@ -56,6 +56,17 @@ body{
   color: rgb(112, 1, 66);
   margin: 5px
 }
+.rodape{
+  display: flex;
+  height: 100px;
+  background-color: rgb(2, 73, 73);
+  color: white;
+}
+.rodape p{
+  float: left;
+  margin-left: 10px;
+  
+}
 
 
 
