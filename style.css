@@ -59,7 +59,7 @@ body{
 .rodape{
   display: flex;
   height: 100px;
-  background-color: rgb(2, 73, 73);
+  background-color: rgb(255, 62, 197);
   color: white;
 }
 .rodape p{
