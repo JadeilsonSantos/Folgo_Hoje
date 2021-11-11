@@ -27,7 +27,6 @@ function minhaFolga(e){
     
     let diasTrabalho = [];
     let folgaBaseAdd = new Date(folgaBase);
-    let i = 0;
 
       while (folgaBaseAdd <= selectDate) 
       { 
