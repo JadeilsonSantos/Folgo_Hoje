@@ -1,4 +1,70 @@
-#data{
+body{
+ padding: 0;
+ margin: 0;
+ box-sizing: border-box;
+ font-family: Arial, Helvetica, sans-serif;
+  
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+.container input{
+  width: 50%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  text-align: center;
+  background-color: rgb(243, 129, 218);
+  color: rgb(255, 255, 255);
+  border-width: 1px;
+  border-bottom: 5px solid rgb(252, 5, 108);
+
+}
+.heder{
+  background-color: rgb(255, 62, 197);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+}
+.resultado{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+.folgas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+.lista{
+  display: flex;
+  flex-grow: initial;
+  flex-wrap: wrap;  
+  list-style: none;
+  
+}
+.lista li{  
+  color: rgb(112, 1, 66);
+  margin: 5px
+}
+
+
+
+
+
+
+
+
+/* #data{
   padding: 20px;
   margin: 20px auto;
   width: 200px;
@@ -24,3 +90,4 @@ font-size: 20px;
 font-weight: bold;
 }
 
+ */
