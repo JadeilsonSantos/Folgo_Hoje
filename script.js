@@ -19,7 +19,7 @@ var texto = document.querySelector("#resultado");
 function minhaFolga(e){
 
   var dataSelecionada = e.target.value;
-  selectDate = new Date(dataSelecionada);
+  selectDate = new Date(dataSelecionada)
     
     var diasDeFolga = [];
     var folgaBaseAdd = new Date(folgaBase);
