@@ -42,21 +42,23 @@ function minhaFolga(e){
   }else{
     texto.innerHTML += (`Você TRABALHARÁ nos dia ${converterDatas(dataSelecionada)}`)
   } */
+  apagar(lista);
+
+var dados = document.createElement('li') // cria elemento li
   
   diasDeFolga.forEach(dias => {
-      let dados = document.createElement('li') // cria elemento li
       lista = document.querySelector('.lista').appendChild(dados)
       lista.innerHTML += `| ${converterDatas(dias)}` 
     })
    
-      lista.innerHTML = ''
   
   //console.log(diferenca)
       //console.log(diasDeFolga)
 }
 
-function apagar(){
-    
+function apagar(li){
+    li = document.querySelector(".lista")
+    li.innerHTML = ""
 }
 
 function zeroNaFrente(data){
