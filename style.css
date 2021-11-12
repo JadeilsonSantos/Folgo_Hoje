@@ -36,7 +36,11 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 1%;
+  color: rgb(252, 5, 108);
+  font-weight: bold;
+  
+
 }
 .folgas{
   display: flex;
@@ -67,6 +71,7 @@ body{
   margin-left: 10px;
   
 }
+
 
 
 
