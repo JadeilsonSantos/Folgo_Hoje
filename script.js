@@ -1,34 +1,40 @@
-var anoAtual = new Date().getFullYear(); 
-var folgaBase = new Date('11/04/2021');
+let anoAtual = new Date().getFullYear(); 
+let folgaBase = new Date('11/04/2021');
+let hoje = new Date();
 const umDiaEmMS = 86400000
-var texto = document.querySelector('.resultado h3');
-var ndata;
+const texto = document.querySelector('.resultado h3');
+const inputData = document.querySelector('.container input');
+let ndata;
+let diasDeFolga = [];
 
 
 function minhaFolga(e){
-  
-  let lista
+
+  let lista;
   apagar(lista);
+  
+  if(inputData.value == "") {texto.innerHTML = ""; return}
   
   const dataSelecionada = e.target.value;
   selectDate = new Date(dataSelecionada)
   
-  let diasDeFolga = [];
   let folgaBaseAdd = new Date(folgaBase);
   
-  while (folgaBaseAdd <= selectDate){ 
-    diasDeFolga.push(folgaBaseAdd.toString());    
-    folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
-  
-  }
-  
+    while (folgaBaseAdd <= selectDate){ 
+
+      diasDeFolga.push(folgaBaseAdd.toString());    
+      folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
+      
+    }
+
+  diasDeFolga = setDiaInicialCalendario(diasDeFolga)
   
   let diferenca = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
   
     if(diferenca > 0 && diferenca <5){
     texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)
   } else{
-    texto.innerHTML += (`Você TRABALHARÁ nos dia ${converterDatas(dataSelecionada)}`)
+    texto.innerHTML += (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`)
   } 
  
 
@@ -42,6 +48,21 @@ function minhaFolga(e){
       } 
     })
 }
+
+function setDiaInicialCalendario(folgas){
+  let ultimoDiaTrabalho = new Date()
+  ultimoDiaTrabalho.setDate(hoje.getDate()-4)
+
+
+  let folgasAtual = folgas.filter(ret => {
+    ret = setarData(ret)
+   return ret > ultimoDiaTrabalho;
+  })
+
+   return folgasAtual;
+   
+}
+
 function apagar(li){
     li = document.querySelector(".lista")
     li.innerHTML = ""
@@ -52,11 +73,11 @@ function zeroNaFrente(data){
   return data <10 ? `0${data}`: `${data}` 
 }
 
-function setarData(d,i){
+function setarData(d,i=0){
   let data = new Date(d)
   ndata = new Date(data)
  ndata.setDate(data.getDate() + i)
-return data;
+ return ndata;
 }
 
 function converterDatas(d,i=1){    
