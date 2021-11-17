@@ -1,5 +1,5 @@
 let anoAtual = new Date().getFullYear(); 
-let folgaBase = new Date('11/04/2021');
+let folgaBase = new Date('10/31/2021');
 let hoje = new Date();
 const umDiaEmMS = 86400000
 const texto = document.querySelector('.resultado h3');
@@ -31,7 +31,7 @@ function minhaFolga(e){
   
   let diferenca = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
   
-    if(diferenca > 0 && diferenca <5){
+    if(diferenca > 4 && diferenca <9){
     texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)
   } else{
     texto.innerHTML += (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`)
@@ -42,7 +42,7 @@ function minhaFolga(e){
   
   diasDeFolga.forEach(dias => {
     lista = document.querySelector('.lista').appendChild(dados)
-      for (let index = 4; index < 8; index++) {
+      for (let index = 0; index < 4; index++) {
 
         lista.innerHTML += `| ${(converterDatas(dias, index))} `
       } 
@@ -51,7 +51,7 @@ function minhaFolga(e){
 
 function setDiaInicialCalendario(folgas){
   let ultimoDiaTrabalho = new Date()
-  ultimoDiaTrabalho.setDate(hoje.getDate()-4)
+  ultimoDiaTrabalho.setDate(hoje.getDate()-3)
 
 
   let folgasAtual = folgas.filter(ret => {
