@@ -8,36 +8,21 @@ let ndata;
 let diasDeFolga = [];
 let lista = document.querySelector(".lista")
 
+const newDataBase = (folgaBase,selectDate) =>{
 
-function minhaFolga(e){
-  apagar(lista);
-  diasDeFolga = [];
-  if(inputData.value == "") {texto.innerHTML = ""; return}
-  
-  const dataSelecionada = e.target.value;
-  selectDate = new Date(dataSelecionada)
-  
   let folgaBaseAdd = new Date(folgaBase);
   
     while (folgaBaseAdd <= selectDate){ 
 
       diasDeFolga.push(folgaBaseAdd.toString());    
       folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
-      
     }
+    return folgaBaseAdd;
+}
 
-  diasDeFolga = setDiaInicialCalendario(diasDeFolga)
-  
-  let diferenca = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
-  
-    if(diferenca > 4 && diferenca <9){
-    texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)
-  } else{
-    texto.innerHTML += (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`)
-  } 
- 
+const escreverNaLista = (diasDeFolga)=> {
 
-  var dados = document.createElement('li') // cria elemento li
+  let dados = document.createElement('li') // cria elemento li
   
   diasDeFolga.forEach(dias => {
     lista = document.querySelector('.lista').appendChild(dados)
@@ -48,18 +33,44 @@ function minhaFolga(e){
     })
 }
 
+const resultadoNoDisplay = (diferencaDatas,dataSelecionada)=> {
+  
+    if(diferencaDatas > 4 && diferencaDatas <9){
+    texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)} 
+    else{
+    texto.innerHTML += (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`)} 
+}
+
+function minhaFolga(e){
+    apagar(lista);
+    diasDeFolga = [];
+    if(inputData.value == "") {texto.innerHTML = ""; return}
+  
+  const dataSelecionada = e.target.value;
+  selectDate = new Date(dataSelecionada)
+  
+  folgaBaseAdd = newDataBase(folgaBase,selectDate)
+
+  diasDeFolga = setDiaInicialCalendario(diasDeFolga)
+  
+  let diferencaDatas = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
+  
+  resultadoNoDisplay(diferencaDatas,selectDate);
+ 
+  escreverNaLista(diasDeFolga);
+
+}
+
 function setDiaInicialCalendario(folgas){
   let ultimoDiaTrabalho = new Date()
   ultimoDiaTrabalho.setDate(hoje.getDate()-3)
-
-
+  
   let folgasAtual = folgas.filter(ret => {
     ret = setarData(ret)
    return ret > ultimoDiaTrabalho;
   })
 
-   return folgasAtual;
-   
+   return folgasAtual; 
 }
 
 function apagar(li){
@@ -84,7 +95,7 @@ function converterDatas(d,i=1){
   let mes = ndata.getMonth() + 1;
   let ano = ndata.getFullYear();
 
-  return `${zeroNaFrente(dia)}/${zeroNaFrente(mes)}/${ano}` // aqui altera como vc quer o retorno
+  return `${zeroNaFrente(dia)}/${zeroNaFrente(mes)}/${ano}`
 }
 
 
