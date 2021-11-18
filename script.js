@@ -6,13 +6,12 @@ const texto = document.querySelector('.resultado h3');
 const inputData = document.querySelector('.container input');
 let ndata;
 let diasDeFolga = [];
+let lista = document.querySelector(".lista")
 
 
 function minhaFolga(e){
-
-  let lista;
   apagar(lista);
-  
+  diasDeFolga = [];
   if(inputData.value == "") {texto.innerHTML = ""; return}
   
   const dataSelecionada = e.target.value;
@@ -64,7 +63,6 @@ function setDiaInicialCalendario(folgas){
 }
 
 function apagar(li){
-    li = document.querySelector(".lista")
     li.innerHTML = ""
     texto.innerHTML = ""
 }
