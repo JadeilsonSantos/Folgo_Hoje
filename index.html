@@ -14,34 +14,31 @@
 
       <div class="container">       
         <h3>Selecione uma Data</h3>
-        <input type="date" onchange="minhaFolga(event);">
+        <input type="date" class="inputData" onchange="minhaFolga(event);">
       </div>
+
+      <div class="container-escala mr-t">
+        <h4>Digite a Escala</h4>
+        <input type="number" id="diasTrabalhando" class="inputEscala mr" >
+       <span>X</span>
+        <input type="number" id="diasDeFolgas" class="inputEscala mr" >
+     </div>
 
       <div class= "resultado">
         <h3>Resultado</h3>
       </div>
-
+    
       <div class="folgas">
           <h3>Dias de folga próximo a data selecionada</h3>
           <ul class="lista"></ul>
           <br>
         </div>
-      <!-- <div class="resultado"> --> 
+     
       </div>
       <div class="rodape">
         <p>Desenvolvido por Jadeilson Santos</p>
       </div>
 
-
-
-
-    <!-- <div id="data">
-      <span>Selecione uma Data</span>
-      <input id='dateSelector'type="date" onchange="minhaFolga(event);"></>
-    </div>
-
-    <div id="resultado">Resultado</div> -->
-   
     <script src="script.js"></script>
     
   </body>
