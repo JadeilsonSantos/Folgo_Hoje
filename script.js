@@ -35,7 +35,7 @@ const escreverNaLista = (diasDeFolga)=> {
 
 const resultadoNoDisplay = (diferencaDatas,dataSelecionada)=> {
   
-    if(diferencaDatas > 4 && diferencaDatas <9){
+    if(diferencaDatas > 4 && diferencaDatas <9 || diferencaDatas == 0) {
     texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)} 
     else{
     texto.innerHTML += (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`)} 
@@ -97,5 +97,3 @@ function converterDatas(d,i=1){
 
   return `${zeroNaFrente(dia)}/${zeroNaFrente(mes)}/${ano}`
 }
-
-
