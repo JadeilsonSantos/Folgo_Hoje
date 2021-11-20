@@ -1,23 +1,65 @@
-let anoAtual = new Date().getFullYear(); 
-let folgaBase = new Date('10/31/2021');
-let hoje = new Date();
-const umDiaEmMS = 86400000
 const texto = document.querySelector('.resultado h3');
 const inputData = document.querySelector('.container input');
+let diasEscalaTrabalhando = document.querySelector('#diasTrabalhando');
+let diasEscalaDeFolga = document.querySelector('#diasDeFolgas');
+let diasTotalEscala;
+let anoAtual = new Date().getFullYear(); 
+let diaTrabalhoBase = new Date('11/03/2021');
+let hoje = new Date();
+const umDiaEmMS = 86400000;
 let ndata;
 let diasDeFolga = [];
-let lista = document.querySelector(".lista")
+let lista = document.querySelector(".lista");
 
-const newDataBase = (folgaBase,selectDate) =>{
+diasEscalaTrabalhando.addEventListener("change",e =>{
+  diasEscalaTrabalhando = Number(e.target.value)
+  apagar()
+  inputData.value = ""
+})
 
-  let folgaBaseAdd = new Date(folgaBase);
-  
-    while (folgaBaseAdd <= selectDate){ 
+diasEscalaDeFolga.addEventListener("change",e =>{
 
-      diasDeFolga.push(folgaBaseAdd.toString());    
-      folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
+  diasEscalaDeFolga = Number(e.target.value);
+  inputData.value = ""
+  apagar()
+
+})
+
+function minhaFolga(e){
+  apagar();
+  diasDeFolga = [];
+  if(inputData.value == "") return
+  if(diasEscalaTrabalhando.value == "" || diasEscalaDeFolga.value == ""){
+    alert('Preencha a Escala')
+     inputData.value = "";return
     }
-    return folgaBaseAdd;
+
+  diasTotalEscala = diasEscalaTrabalhando + diasEscalaDeFolga
+
+  const dataSelecionada = e.target.value;
+selectDate = new Date(dataSelecionada)
+
+diaTrabalhoBaseAdd = newDataBase(diaTrabalhoBase,selectDate)
+
+diasDeFolga = setDiaInicialCalendario(diasDeFolga)
+
+  let diferencaDatas = Math.floor((selectDate - diaTrabalhoBase) / umDiaEmMS) + 1
+
+resultadoNoDisplay(selectDate,diferencaDatas);
+escreverNaLista(diasDeFolga);
+
+}
+
+const newDataBase = (diaTrabalhoBase,selectDate) =>{
+
+  let diaTrabalhoBaseAdd = new Date(diaTrabalhoBase);
+  
+    while (diaTrabalhoBaseAdd <= selectDate){ 
+
+      diasDeFolga.push(diaTrabalhoBaseAdd.toString());    
+      diaTrabalhoBaseAdd.setDate(diaTrabalhoBaseAdd.getDate()+8)
+    }
+    return diaTrabalhoBaseAdd;
 }
 
 const escreverNaLista = (diasDeFolga)=> {
@@ -33,33 +75,16 @@ const escreverNaLista = (diasDeFolga)=> {
     })
 }
 
-const resultadoNoDisplay = (diferencaDatas,dataSelecionada)=> {
+const resultadoNoDisplay = (dataSelecionada,diferencaDatas)=> {
   
-    if(diferencaDatas > 4 && diferencaDatas <9 || diferencaDatas == 0) {
-    texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)} 
+
+    if(diferencaDatas % diasTotalEscala > 0 && diferencaDatas % diasTotalEscala <= diasEscalaTrabalhando){
+    texto.innerHTML = (`Você TRABALHARÁ no dia ${ converterDatas(dataSelecionada) }`)} 
+    
     else{
-    texto.innerHTML += (`Você TRABALHARÁ no dia ${converterDatas(dataSelecionada)}`)} 
+    texto.innerHTML += (`Você FOLGARÁ no dia ${converterDatas(dataSelecionada)}`)} 
 }
 
-function minhaFolga(e){
-    apagar(lista);
-    diasDeFolga = [];
-    if(inputData.value == "") {texto.innerHTML = ""; return}
-  
-  const dataSelecionada = e.target.value;
-  selectDate = new Date(dataSelecionada)
-  
-  folgaBaseAdd = newDataBase(folgaBase,selectDate)
-
-  diasDeFolga = setDiaInicialCalendario(diasDeFolga)
-  
-  let diferencaDatas = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
-  
-  resultadoNoDisplay(diferencaDatas,selectDate);
- 
-  escreverNaLista(diasDeFolga);
-
-}
 
 function setDiaInicialCalendario(folgas){
   let ultimoDiaTrabalho = new Date()
@@ -73,9 +98,11 @@ function setDiaInicialCalendario(folgas){
    return folgasAtual; 
 }
 
-function apagar(li){
-    li.innerHTML = ""
+function apagar(){
+    lista.innerHTML = ""
     texto.innerHTML = ""
+    
+
 }
 
 function zeroNaFrente(data){
