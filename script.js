@@ -53,6 +53,7 @@ escreverNaLista(diasDeFolga);
 const newDataBase = (diaTrabalhoBase,selectDate) =>{
 
   let diaTrabalhoBaseAdd = new Date(diaTrabalhoBase);
+  diaTrabalhoBaseAdd.setDate(diaTrabalhoBase.getDate()+diasEscalaTrabalhando + 1)
   
     while (diaTrabalhoBaseAdd <= selectDate){ 
 
@@ -68,7 +69,7 @@ const escreverNaLista = (diasDeFolga)=> {
   
   diasDeFolga.forEach(dias => {
     lista = document.querySelector('.lista').appendChild(dados)
-      for (let index = 0; index < 4; index++) {
+      for (let index = 0; index < diasEscalaDeFolga; index++) {
 
         lista.innerHTML += `| ${(converterDatas(dias, index))} `
       } 
