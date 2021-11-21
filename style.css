@@ -18,6 +18,9 @@ body{
   align-items: center;
 }
 
+.container h4{
+  margin: 5px;
+}
 
 .container-escala{
   display: flex;
