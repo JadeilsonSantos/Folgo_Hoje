@@ -58,7 +58,7 @@ const newDataBase = (diaTrabalhoBase,selectDate) =>{
     while (diaTrabalhoBaseAdd <= selectDate){ 
 
       diasDeFolga.push(diaTrabalhoBaseAdd.toString());    
-      diaTrabalhoBaseAdd.setDate(diaTrabalhoBaseAdd.getDate()+8)
+      diaTrabalhoBaseAdd.setDate(diaTrabalhoBaseAdd.getDate()+diasTotalEscala )
     }
     return diaTrabalhoBaseAdd;
 }
