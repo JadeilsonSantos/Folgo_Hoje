@@ -1,82 +1,127 @@
-var anoAtual = new Date().getFullYear(); 
-var folgaBase = new Date('11/04/2021');
-const umDiaEmMS = 86400000
-var texto = document.querySelector('.resultado');
+const texto = document.querySelector('.resultado h3');
+const inputData = document.querySelector('.container input');
+let diasEscalaTrabalhando = document.querySelector('#diasTrabalhando');
+let diasEscalaDeFolga = document.querySelector('#diasDeFolgas');
+let diasTotalEscala;
+let anoAtual = new Date().getFullYear(); 
+let diaTrabalhoBase = new Date('11/03/2021');
+let hoje = new Date();
+const umDiaEmMS = 86400000;
+let ndata;
+let diasDeFolga = [];
+let lista = document.querySelector(".lista");
 
-/* const convertDate = () => {
-  
-  //e aí manoo
-  //ok
-  
-  let day = dataSelecionada.getDate();
-  let moth = dataSelecionada.getMoth();
-  let year = dataSelecionada.getFullYear();
-  
-  dataSelecionada = `${day}/${moth}/${year}`
-  
-  minhaFolga(e,dataSelecionada,selectDate) 
-}  */
+diasEscalaTrabalhando.addEventListener("change",e =>{
+  diasEscalaTrabalhando = Number(e.target.value)
+  apagar()
+  inputData.value = ""
+})
+
+diasEscalaDeFolga.addEventListener("change",e =>{
+
+  diasEscalaDeFolga = Number(e.target.value);
+  inputData.value = ""
+  apagar()
+
+})
 
 function minhaFolga(e){
-  
-  let lista
-  
+  apagar();
+  diasDeFolga = [];
+  if(inputData.value == "") return
+  if(diasEscalaTrabalhando.value == "" || diasEscalaDeFolga.value == ""){
+    alert('Preencha a Escala')
+     inputData.value = "";return
+    }
+
+  diasTotalEscala = diasEscalaTrabalhando + diasEscalaDeFolga
+
   const dataSelecionada = e.target.value;
-  selectDate = new Date(dataSelecionada)
+selectDate = new Date(dataSelecionada)
+
+diaTrabalhoBaseAdd = newDataBase(diaTrabalhoBase,selectDate)
+
+diasDeFolga = setDiaInicialCalendario(diasDeFolga)
+
+  let diferencaDatas = Math.floor((selectDate - diaTrabalhoBase) / umDiaEmMS) + 1
+
+resultadoNoDisplay(selectDate,diferencaDatas);
+escreverNaLista(diasDeFolga);
+
+}
+
+const newDataBase = (diaTrabalhoBase,selectDate) =>{
+
+  let diaTrabalhoBaseAdd = new Date(diaTrabalhoBase);
+  diaTrabalhoBaseAdd.setDate(diaTrabalhoBase.getDate()+diasEscalaTrabalhando + 1)
   
-  let diasDeFolga = [];
-  let folgaBaseAdd = new Date(folgaBase);
-  //let i = 0;
-  
-  while (folgaBaseAdd <= selectDate){ 
-    diasDeFolga.push(folgaBaseAdd.toString()); // aqui deve ta retornando sempre a mesma data        
-    folgaBaseAdd.setDate(folgaBaseAdd.getDate()+8)
-    //i+=8 // aqui faz o incremento da data né? >>> Sim
-  }
-  
-  
-  let diferenca = Math.floor((folgaBaseAdd - selectDate) / umDiaEmMS)
-  
-  /* if(diferenca > 0 && diferenca <5){
-    texto.innerHTML = (`Você estará de FOLGA no dia ${ converterDatas(dataSelecionada) }`)
-  }else{
-    texto.innerHTML += (`Você TRABALHARÁ nos dia ${converterDatas(dataSelecionada)}`)
-  } */
+    while (diaTrabalhoBaseAdd <= selectDate){ 
+
+      diasDeFolga.push(diaTrabalhoBaseAdd.toString());    
+      diaTrabalhoBaseAdd.setDate(diaTrabalhoBaseAdd.getDate()+diasTotalEscala )
+    }
+    return diaTrabalhoBaseAdd;
+}
+
+const escreverNaLista = (diasDeFolga)=> {
+
+  let dados = document.createElement('li') // cria elemento li
   
   diasDeFolga.forEach(dias => {
-      let dados = document.createElement('li') // cria elemento li
-      lista = document.querySelector('.lista').appendChild(dados)
-      lista.innerHTML += `| ${converterDatas(dias)}` 
+    lista = document.querySelector('.lista').appendChild(dados)
+      for (let index = 0; index < diasEscalaDeFolga; index++) {
+
+        lista.innerHTML += `| ${(converterDatas(dias, index))} `
+      } 
     })
-   
-      lista.innerHTML = ''
+}
+
+const resultadoNoDisplay = (dataSelecionada,diferencaDatas)=> {
   
-  //console.log(diferenca)
-      //console.log(diasDeFolga)
+
+    if(diferencaDatas % diasTotalEscala > 0 && diferencaDatas % diasTotalEscala <= diasEscalaTrabalhando){
+    texto.innerHTML = (`Você TRABALHARÁ no dia ${ converterDatas(dataSelecionada) }`)} 
+    
+    else{
+    texto.innerHTML += (`Você FOLGARÁ no dia ${converterDatas(dataSelecionada)}`)} 
+}
+
+
+function setDiaInicialCalendario(folgas){
+  let ultimoDiaTrabalho = new Date()
+  ultimoDiaTrabalho.setDate(hoje.getDate()-3)
+  
+  let folgasAtual = folgas.filter(ret => {
+    ret = setarData(ret)
+   return ret > ultimoDiaTrabalho;
+  })
+
+   return folgasAtual; 
 }
 
 function apagar(){
+    lista.innerHTML = ""
+    texto.innerHTML = ""
     
+
 }
 
 function zeroNaFrente(data){
-  return data <= 9 ? `0${data}`: `${data}` 
+  return data <10 ? `0${data}`: `${data}` 
 }
 
-function converterDatas(d){    
+function setarData(d,i=0){
   let data = new Date(d)
-  let ndata = new Date(data)
-  ndata.setDate(data.getDate() + 1)
- 
-  let dia = ndata.getDate()
-  let mes = ndata.getMonth() +1
-  let ano = ndata.getFullYear()
-
-  //console.log(`${dia}/${mes}/${ano}`)
-  //return ndata
-  return `${zeroNaFrente(dia)}/${zeroNaFrente(mes)}/${ano}` // aqui altera como vc quer o retorno
+  ndata = new Date(data)
+ ndata.setDate(data.getDate() + i)
+ return ndata;
 }
 
-// Vou jogar aqui o codigo
-// Testa ai
+function converterDatas(d,i=1){    
+  setarData(d,i); 
+  let dia = ndata.getDate();
+  let mes = ndata.getMonth() + 1;
+  let ano = ndata.getFullYear();
 
+  return `${zeroNaFrente(dia)}/${zeroNaFrente(mes)}/${ano}`
+}
